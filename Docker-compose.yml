@@ -1,0 +1,94 @@
+version: '3.8'  # Specifies the version of Compose
+
+services:
+  angular-app:
+    build:
+      context: ./angular
+      dockerfile: ./Dockerfile-angular
+    ports:
+      - "8000:80"
+    volumes:
+      - ./angular:/app
+      
+  db:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Root password
+      MYSQL_DATABASE: temperature_analysis    # Initial database name
+                   # Optional non-root user
+      MYSQL_PASSWORD: root  # Password for non-root user
+    ports:
+      - "3309:3306"  # Maps MySQL port
+    volumes:
+      - mysql_data:/var/lib/mysql  # Stores MySQL data on a volume
+      - ./mysql-init:/docker-entrypoint-initdb.d
+  #     # - ./my.cnf:/etc/my.cnf
+
+  api:
+    build: 
+      context: ./subscriber
+      dockerfile: ./Dockerfile
+    ports:
+      - "3002:3001"  # Map container's port to your machine's port
+      - "9227:9229"
+    environment:
+      - NODE_ENV=development  # Pass environment variables (optional)
+    volumes:
+      - ./subscriber:/app                # Mount current directory to /app in container    # Avoid overwriting node_modules folder
+    command: node --inspect=0.0.0.0:9229 index.js --ENVS=${ENVS}   # Command to run the application
+    # depends_on:
+    #  - db
+
+  
+  client-api:
+    build: 
+      context: ./client
+      dockerfile: ./Dockerfile
+    ports:
+      - "3003:3001"  # Map container's port to your machine's port
+      - "9228:9229"
+    environment:
+      - NODE_ENV=development  # Pass environment variables (optional)
+      - HOST=db
+    volumes:
+      - ./client:/app                # Mount current directory to /app in container    # Avoid overwriting node_modules folder
+    command: node --inspect=0.0.0.0:9229 index.js 
+    # depends_on:
+    #  - db
+  
+
+  # mysq-migration:
+  #   image: mysql:latest
+  #   volumes:
+  #     - ./databases:/sql-migrations
+  #     - ./migration.sh:/migration.sh
+  #   depends_on:
+  #     - db
+  #   entrypoint: ["bash","-c", "/migration.sh"]
+  #   environment:
+  #     DATABASE: temperature_analysis
+  #     PASSWORD: root
+  #     PORT: 3306
+  #     HOST: db
+  #     USER: root
+  mosquitto:
+    image: eclipse-mosquitto:latest  # Use the latest Mosquitto image
+    container_name: mqtt-broker
+    ports:
+      - "1883:1883"  # MQTT default port
+      - "9001:9001"  # WebSocket port (optional)
+    volumes:
+      - mosquitto_data:/mosquitto/data  # Persist data
+      - mosquitto_config:/mosquitto/config  # Custom config (if needed)
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf  
+
+volumes:
+  mysql_data:
+   driver: local
+  mosquitto_data:
+  mosquitto_config:
+  # app-network:
+  #   driver: bridge
+  

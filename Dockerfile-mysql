@@ -1,0 +1,7 @@
+FROM --platform=linux/amd64 mysql/mysql-server:5.7
+ENV TZ=Etc/UTC
+COPY my.cnf /etc/my.cnf
+# COPY tenant_milagro.z01 ./tenant_milagro.z01
+# COPY tenant_milagro.z02 ./tenant_milagro.z02
+
+EXPOSE 3306

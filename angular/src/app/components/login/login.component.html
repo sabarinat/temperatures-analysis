@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="welcome-section">
+        <!-- Welcome Message -->
+        <div class="welcome-message">
+            <h2>Welcome to Warehouse Temperature Checker!</h2>
+        </div>
+        <div>
+            <app-slideshow></app-slideshow>
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <form *ngIf="isLoginMode" [formGroup]="loginForm">
+        <div class="row box justify-content-center m-0">
+            <div class="text-center p-0">
+                <h4>Login</h4>
+            </div>
+            <div class="col-12">
+                <label>Email</label>
+                <input type="email" formControlName="email">
+            </div>
+            <div class="col-12">
+                <label>Password</label>
+                <input type="password" formControlName="password">
+            </div>
+            <div class="align-content">
+                <button class="btn btn-primary" (click)="onSubmit()">Login</button>
+            </div>
+            <div class="text-center mt-3">
+                <p>Don't have an account? <a href="#" (click)="toggleMode()">Sign Up</a></p>
+            </div>
+        </div>
+    </form>
+
+    <!-- Sign-Up Form -->
+    <form *ngIf="!isLoginMode" [formGroup]="signupForm">
+        <div class="row box justify-content-center m-0">
+            <div class="text-center p-0">
+                <h4>Sign Up</h4>
+            </div>
+            <div class="col-12">
+                <label>Email</label>
+                <input type="email" formControlName="email">
+            </div>
+            <div class="col-12">
+                <label>Password</label>
+                <input type="password" formControlName="password">
+            </div>
+            <div class="col-12">
+                <label>Confirm Password</label>
+                <input type="password" formControlName="confirmPassword">
+            </div>
+            <div class="align-content">
+                <button class="btn btn-primary" (click)="onSignUp()">Sign Up</button>
+            </div>
+            <div class="text-center mt-3">
+                <p>Already a user? <a href="#" (click)="toggleMode()">Sign In</a></p>
+            </div>
+        </div>
+    </form>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <p>App Version: 1.0.0</p>
+        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+    </div>
+</footer>

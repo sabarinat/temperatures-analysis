@@ -1,0 +1,16 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align content */
+    padding: 20px;
+}
+
+.header {
+    margin-bottom: 20px; /* Space between header and tabs */
+    text-align: center; /* Center header text */
+}
+
+/* Optional: Add styles for the tab group */
+mat-tab-group {
+    width: 100%; /* Make sure the tab group takes full width */
+}

@@ -1,0 +1,13 @@
+CONSTANT =  {
+    
+     SUCCESS: "SUCCESS",
+     FAILURE: "FAILURE",
+     INTERNAL_ERROR: "INTERNAL_ERROR",
+     TOKEN_TIME_LIMIT: '24h',
+     JWT_SECRET_TOKEN: 'Test',
+     UPDATE_COUNT: 22,
+     NO_DATA_FOUND: 'NO DATA FOUND',
+     INTE_SERVER_CODE: 500
+}
+
+module.exports = CONSTANT;

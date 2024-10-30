@@ -1,0 +1,119 @@
+/* Center the container and add subtle background color */
+.container {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    position: relative;
+}
+
+.welcome-section {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.welcome-message h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+    color: #495057;
+    right: 10%;
+}
+
+
+/* Style the main box */
+.box {
+    border: 1px solid #e3e9f3;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    padding: 40px 30px;
+    background-color: #fff;
+}
+
+/* Add heading styles */
+.box h4 {
+    margin: 0 0 30px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Style the labels */
+.box label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #495057;
+}
+
+/* Style the input fields */
+.box input {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    background-color: #f8f9fa;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+/* Input focus effect */
+.box input:focus {
+    border-color: #6f7fa9;
+}
+
+/* Button styling */
+.box button {
+    margin-top: 20px;
+    background-color: #6f7fa9;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 20px;
+    border: none;
+    width: 100%;
+    max-width: 150px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Button hover effect */
+.box button:hover {
+    background-color: #596690;
+}
+
+/* Align button to center */
+.align-content {
+    display: flex;
+    justify-content: center;
+}
+/* Styling for the welcome message */
+.welcome-message {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4a5268;
+}
+
+
+.footer {
+    width: 100%;
+    background-color: white; /* Light background for the footer */
+    padding: 10px 0; /* Vertical padding */
+    text-align: center; /* Center the text */
+    position: relative; /* Make sure it's positioned in relation to the parent */
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+.footer-content {
+    font-size: 14px; /* Adjust font size as needed */
+    color: #4a5268; /* Change color to fit your theme */
+}
