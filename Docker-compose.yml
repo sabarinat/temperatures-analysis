@@ -10,20 +10,20 @@ services:
     volumes:
       - ./angular:/app
       
-  db:
-    build: 
-      context: .
-      dockerfile: ./Dockerfile-mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root  # Root password
-      MYSQL_DATABASE: temperature_analysis    # Initial database name
-                   # Optional non-root user
-      MYSQL_PASSWORD: root  # Password for non-root user
-    ports:
-      - "3309:3306"  # Maps MySQL port
-    volumes:
-      - mysql_data:/var/lib/mysql  # Stores MySQL data on a volume
-      - ./mysql-init:/docker-entrypoint-initdb.d
+  # db:
+  #   build: 
+  #     context: .
+  #     dockerfile: ./Dockerfile-mysql
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root  # Root password
+  #     MYSQL_DATABASE: temperature_analysis    # Initial database name
+  #                  # Optional non-root user
+  #     MYSQL_PASSWORD: root  # Password for non-root user
+  #   ports:
+  #     - "3309:3306"  # Maps MySQL port
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql  # Stores MySQL data on a volume
+  #     - ./mysql-init:/docker-entrypoint-initdb.d
   #     # - ./my.cnf:/etc/my.cnf
 
   api:
@@ -36,8 +36,9 @@ services:
     environment:
       - NODE_ENV=development  # Pass environment variables (optional)
     volumes:
-      - ./subscriber:/app                # Mount current directory to /app in container    # Avoid overwriting node_modules folder
-    command: node --inspect=0.0.0.0:9229 index.js --ENVS=${ENVS}   # Command to run the application
+      - ./subscriber:/app  
+      - /app/node_modules              # Mount current directory to /app in container    # Avoid overwriting node_modules folder
+    command: node --inspect=0.0.0.0:9229 /app/index.js --ENVS=${ENVS}   # Command to run the application
     # depends_on:
     #  - db
 
@@ -53,7 +54,8 @@ services:
       - NODE_ENV=development  # Pass environment variables (optional)
       - HOST=db
     volumes:
-      - ./client:/app                # Mount current directory to /app in container    # Avoid overwriting node_modules folder
+      - ./client:/app    
+      - /app/node_modules            # Mount current directory to /app in container    # Avoid overwriting node_modules folder
     command: node --inspect=0.0.0.0:9229 index.js 
     # depends_on:
     #  - db
@@ -85,8 +87,8 @@ services:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf  
 
 volumes:
-  mysql_data:
-   driver: local
+  # mysql_data:
+  #  driver: local
   mosquitto_data:
   mosquitto_config:
   # app-network:

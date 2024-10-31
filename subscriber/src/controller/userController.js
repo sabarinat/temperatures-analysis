@@ -1,5 +1,4 @@
 var users = require('../services/userService');
-var common = require('../common/common')
 
 const signup = async (req, res) => {
   try {
@@ -15,21 +14,21 @@ const signup = async (req, res) => {
 const generateOtpForSignUp = async (req, res) => {
 
     const resp = await users.generateOtpForSignUp(req.body.mobileNumber);
-    common.response(res, resp.data, resp.message, resp.status, resp.statusCode)
+    //common.response(res, resp.data, resp.message, resp.status, resp.statusCode)
 
 }
 
 const generateOtpForLogin = async (req, res) => {
 
     const resp = await users.generateOtpForLogin(req.body.mobileNumber);
-    common.response(res, resp.data, resp.message, resp.status, resp.statusCode)
+    //common.response(res, resp.data, resp.message, resp.status, resp.statusCode)
 
 }
 
 const validateOtp = async (req, res) => {
 
     const resp = await users.validateOtp(req.body.mobileNumber,req.body.otp);
-    await common.response(res, resp.data, resp.message, resp.status, resp.statusCode);
+   // await common.response(res, resp.data, resp.message, resp.status, resp.statusCode);
 
 }
 
@@ -40,14 +39,14 @@ const addUserDetails = async (req, res) => {
                                             req.body.dietPreference, req.body.goal, 
                                             req.body.foodAllergies, req.userDetails.id
                                             );
-    await common.response(res, resp.data, resp.message, resp.status, resp.statusCode);
+    //await common.response(res, resp.data, resp.message, resp.status, resp.statusCode);
 
 }
 const verifyMail = async (req, res) => {
 
     const resp = await users.verifyMail(req.body.email, req.body.slot, req.body.id);
 
-    await common.response(res, resp.data, resp.message, resp.status,  resp.statusCode)
+    //await common.response(res, resp.data, resp.message, resp.status,  resp.statusCode)
 
 }
 
@@ -55,7 +54,7 @@ const cancelMeals = async (req, res) => {
 
     const resp = await users.cancelMeals(req.body.userId, req.body.cancelDate, req.body.breakFast, req.body.lunch, req.body.dinner);
 
-    await common.response(res, resp.data, resp.message, resp.status, resp.statusCode);
+    //await common.response(res, resp.data, resp.message, resp.status, resp.statusCode);
 
 }
 

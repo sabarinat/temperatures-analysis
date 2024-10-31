@@ -1,4 +1,4 @@
-var apiUrls = require('./appication')
+
 var {verifyToken} = require('./encryt')
 
 var authenticate = async (req, res, next) => {

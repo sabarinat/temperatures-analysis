@@ -5,12 +5,12 @@ FROM node:18
 WORKDIR /app
 
 # Copy package.json and package-lock.json files to the container
-COPY package*.json ./
+COPY . .
 
 # Install project dependencies
 RUN npm install
 
 # Copy the rest of the application files to the container
-COPY . .
+
 
 # Expose the port that the app runs on (adjust if needed)

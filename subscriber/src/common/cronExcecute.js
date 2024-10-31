@@ -1,8 +1,8 @@
-var nodecron = require('node-cron');
-var executeQuery = require('../../database/databaseConnection');
-var commonFunc = require('./common');
-var moment = require('moment');
-var CONSTANT = require('./constant');
+// var nodecron = require('node-cron');
+// var executeQuery = require('../../database/databaseConnection');
+// var commonFunc = require('./common');
+// var moment = require('moment');
+// var CONSTANT = require('./constant');
 
 module.exports = async () => {
     
