@@ -14,23 +14,46 @@ const addTemperature = async (temperature) => {
 
 const getTemperature = async() => {
     try {
-       const dataSql = `SELECT temperature, created_at as date FROM tbl_temperature WHERE is_deleted = 0 `;
-       const temperatureDetail = await executeQuery(dataSql, []);
-       let label = [];
-       let values = [];
-       for(let data of temperatureDetail) {
-        label.push(data.date);
-        values.push(data.temperature);
-       } 
+       const [barChart, pieChart] = await Promise.all([getAllTemperature(), getTemperatureForGroup()])
        return {
-        barChart: [label, values],
-        piechart: [label, values],
-        doughnutChart: [label, values],
-        lineChart:[label, values],
+        barChart: barChart,
+        piechart: pieChart,
+        doughnutChart: pieChart,
+        lineChart:pieChart,
        } ;
     } catch(err) {
         throw new Error(err);
     }
+}
+
+async function getAllTemperature() {
+    try {
+        const dataSql = `SELECT temperature, DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') as date FROM tbl_temperature WHERE is_deleted = 0 `;
+        const temperatureDetail = await executeQuery(dataSql, []);
+        return chartFormatData(temperatureDetail); 
+    } catch(err) {
+        throw new Error(err);
+    }
+    
+}
+async function getTemperatureForGroup() {
+   try {
+     const datasQuery = `SELECT SUM(temperature)/count(DATE_FORMAT(created_at, '%Y-%m-%d')) AS temperature, DATE_FORMAT(created_at, '%Y-%m-%d') AS date FROM tbl_temperature WHERE is_deleted = 0 GROUP BY date`;
+     const groupData = await executeQuery(datasQuery, []);
+     return chartFormatData(groupData);
+   } catch(err) {
+     throw new Error(err);
+   }
+}
+
+function chartFormatData(chartDatas) {
+    let label = [];
+    let value = [];
+    for(let data of chartDatas) {
+       label.push(data.date);
+       value.push(parseFloat(data.temperature).toFixed(2))
+    }
+    return [label, value];
 }
 
 
