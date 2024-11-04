@@ -13,7 +13,7 @@ client.on('connect', () => {
                 console.log(`Published: ${temperature} to home/livingroom/temperature`);
             }
         });
-    }, 5000);
+    }, 6000);
     // Subscribe to a topic
     // client.subscribe('home/livingroom/temperature', (err) => {
     //     if (!err) {
