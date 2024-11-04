@@ -10,6 +10,7 @@ const signup = async (addDatas) => {
           throw new Error('User already exist')
         } else {
             const InserData = `INSERT INTO tbl_users(email, password) VALUES(?, ?)`;
+            console.log("TEsttt", userDetails)
             await executeQuery(InserData, [addDatas.email, addDatas.password]);
             return { message:"User added successfully"} ;
         }
@@ -25,7 +26,7 @@ const signup = async (addDatas) => {
 
 const userByEmail = async (email) => {
     try {
-       let listSql = " SELECT mobile_number FROM tbl_users WHERE email = ? AND is_deleted = 0 "
+       let listSql = " SELECT * FROM tbl_users WHERE email = ? AND is_deleted = 0 "
        let params = [email]
        return await executeQuery(listSql, params);
     } catch (e) {

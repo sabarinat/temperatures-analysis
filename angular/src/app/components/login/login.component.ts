@@ -64,7 +64,7 @@ export class LoginComponent {
 
   onSignUp() {
     if (this.signupForm.valid) {
-      this.userService.signup(this.loginForm.value).subscribe((res)=>{
+      this.userService.signup(this.signupForm.value).subscribe((res)=>{
         if(res.data && res.data.length){
           alert(CONSTANTS.SUCCESS)
         } else {

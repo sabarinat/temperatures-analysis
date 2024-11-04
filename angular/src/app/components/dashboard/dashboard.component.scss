@@ -1,3 +1,10 @@
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
 .chart-container {
     display: flex;
     flex-wrap: wrap;
@@ -19,3 +26,6 @@
   }
  
   
+  mat-form-field {
+    margin: 1em;
+  }
